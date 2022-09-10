@@ -37,3 +37,23 @@ class TestCategoryUnit(unittest.TestCase):
             category1.created_at.timestamp(),
             category2.created_at.timestamp()
         )
+
+    def test_if_category_is_activate(self):
+        category1 = Category(name='Movie 1', is_active=False)
+        category1.activate()
+
+        self.assertEqual(category1.is_active, True)
+
+    def test_if_category_is_deactivate(self):
+        category1 = Category(name='Movie 1')
+        category1.deactivate()
+
+        self.assertEqual(category1.is_active, False)
+
+    def test_if_category_name_and_description_is_updated(self):
+        category1 = Category(name='Movie 1')
+        category1.update(name='Movie updated',
+                         description='some description is updated')
+
+        self.assertEqual(category1.name, 'Movie updated')
+        self.assertEqual(category1.description, 'some description is updated')
