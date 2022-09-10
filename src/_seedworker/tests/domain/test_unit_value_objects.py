@@ -54,7 +54,7 @@ class TestUniqueEntityIdUnit(unittest.TestCase):
         self.assertTrue(is_dataclass(UniqueEntityId))
 
     def test_throw_exception_when_uuid_is_invalid(self):
-       with patch.object(
+        with patch.object(
             UniqueEntityId,
             '_UniqueEntityId__validate',
             autospec=True,
@@ -75,7 +75,7 @@ class TestUniqueEntityIdUnit(unittest.TestCase):
         ) as mock_validate:
             value_object = UniqueEntityId(
                 'af46842e-027d-4c91-b259-3a3642144ba4'
-                )
+            )
             mock_validate.assert_called_once()
             self.assertEqual(
                 value_object.id, 'af46842e-027d-4c91-b259-3a3642144ba4')
