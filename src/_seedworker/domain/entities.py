@@ -7,7 +7,7 @@ from typing import Any
 from _seedworker.domain.value_objects import UniqueEntityId
 
 
-@dataclass(frozen=True)
+@dataclass(frozen=True, slots=True)
 class Entity(ABC):
     unique_entity_id: UniqueEntityId = field(
         default_factory=lambda: UniqueEntityId()  # pylint: disable=unnecessary-lambda
