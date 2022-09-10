@@ -29,7 +29,8 @@
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
 		"ms-python.python",
-		"sourcery.sourcery"
+		"sourcery.sourcery",
+		"bungcip.better-toml"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.

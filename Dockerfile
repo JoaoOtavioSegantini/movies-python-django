@@ -7,7 +7,7 @@ RUN apt update && apt install -y --no-install-recommends \
                     curl \
                     wget \
                     fonts-powerline \
-                    gnupg2 
+                    gnupg 
 
 RUN useradd -ms /bin/bash python
 
@@ -29,12 +29,12 @@ RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/
     -p https://github.com/zdharma-continuum/fast-syntax-highlighting \
     -p https://github.com/zsh-users/zsh-autosuggestions \
     -p https://github.com/zsh-users/zsh-completions \
-    -a 'export TERM=xterm-256color'
+    -a 'export TERM=xterm-256color' \
+    -a 'export GPG_TTY=$(tty)'
 
 RUN echo '[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh' >> ~/.zshrc && \
     echo 'HISTFILE=/home/python/zsh/.zsh_history' >> ~/.zshrc && \
     echo 'eval "$(pdm --pep582)"' >> ~/.zshrc && \
     echo 'eval "$(pdm --pep582)"' >> ~/.bashrc
-
 
 CMD [ "tail", "-f", "/dev/null" ]
