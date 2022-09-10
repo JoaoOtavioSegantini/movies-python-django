@@ -6,7 +6,8 @@ RUN apt update && apt install -y --no-install-recommends \
                     zsh \
                     curl \
                     wget \
-                    fonts-powerline
+                    fonts-powerline \
+                    gnupg2 
 
 RUN useradd -ms /bin/bash python
 
