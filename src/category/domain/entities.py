@@ -6,6 +6,7 @@ from _seedworker.domain.entities import Entity
 from _seedworker.domain.exceptions import EntityValidationException
 from category.domain.validators import CategoryValidatorFactory
 
+
 @dataclass(kw_only=True, frozen=True, slots=True)  # init, repr, eq
 class Category(Entity):
 
@@ -20,7 +21,7 @@ class Category(Entity):
         if not self.created_at:
             self._set('created_at',  datetime.now())
         self.validate()
-        
+
     # def __new__(cls, **kwargs):
     #     cls.validate(name=kwargs.get('name'), description=kwargs.get('description'),
     #     is_active=kwargs.get('is_active'))
