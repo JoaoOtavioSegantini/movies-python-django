@@ -5,7 +5,7 @@ from category.infra.repositories import CategoryInMemoryRepository
 from category.domain.entities import Category
 
 
-class TestCategoryInfraRepository(unittest.TestCase):
+class TestCategoryInfraRepositoryUnit(unittest.TestCase):
 
     repo: CategoryInMemoryRepository
 
