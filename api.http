@@ -1,0 +1,32 @@
+
+@id = {{api_category.response.body.id}}
+
+GET http://localhost:8000/categories/
+
+###
+GET http://localhost:8000/categories/{{id}}/
+
+### 
+# @name api_category
+POST http://localhost:8000/categories/
+Content-Type: application/json
+
+{
+    "name": "Movie"
+}
+
+###
+PUT http://localhost:8000/categories/{{id}}/
+Content-Type: application/json
+
+{
+    "name": "Sports",
+    "description": "A categoria mais assistida"
+}
+
+###
+DELETE  http://localhost:8000/categories/{{id}}/
+
+
+
+
