@@ -6,3 +6,4 @@ __pypackages__
 .pytest_cache
 .coverage
 __coverage
+db.sqlite3
