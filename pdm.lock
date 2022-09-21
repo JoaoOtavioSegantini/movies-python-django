@@ -121,6 +121,14 @@ requires_python = ">=3.6"
 summary = "McCabe checker, plugin for flake8"
 
 [[package]]
+name = "model-bakery"
+version = "1.7.0"
+summary = "Smart object creation facility for Django."
+dependencies = [
+    "django>=3.2",
+]
+
+[[package]]
 name = "packaging"
 version = "21.3"
 requires_python = ">=3.6"
@@ -258,7 +266,7 @@ summary = "Module for decorators, wrappers and monkey patching."
 
 [metadata]
 lock_version = "4.0"
-content_hash = "sha256:f7a6c009b6328e169832207b7d1c78a28f2e20cd89f0feedb184ef805fc95aba"
+content_hash = "sha256:459125cc67833816afece39bffe22913f0a1749cb7ed7ae69f717819ca057de8"
 
 [metadata.files]
 "asgiref 3.5.2" = [
@@ -437,6 +445,10 @@ content_hash = "sha256:f7a6c009b6328e169832207b7d1c78a28f2e20cd89f0feedb184ef805
 "mccabe 0.7.0" = [
     {url = "https://files.pythonhosted.org/packages/27/1a/1f68f9ba0c207934b35b86a8ca3aad8395a3d6dd7921c0686e23853ff5a9/mccabe-0.7.0-py2.py3-none-any.whl", hash = "sha256:6c2d30ab6be0e4a46919781807b4f0d834ebdd6c6e3dca0bda5a15f863427b6e"},
     {url = "https://files.pythonhosted.org/packages/e7/ff/0ffefdcac38932a54d2b5eed4e0ba8a408f215002cd178ad1df0f2806ff8/mccabe-0.7.0.tar.gz", hash = "sha256:348e0240c33b60bbdf4e523192ef919f28cb2c3d7d5c7794f74009290f236325"},
+]
+"model-bakery 1.7.0" = [
+    {url = "https://files.pythonhosted.org/packages/10/2c/0735dfca34fa7b92ca486c17e4afcc230edd99fd3aafce7d47626114025d/model_bakery-1.7.0-py2.py3-none-any.whl", hash = "sha256:9e7e7436174a69892972eb6717a877ac346d70a8a2ada4fd2b583bb3dca2ad7e"},
+    {url = "https://files.pythonhosted.org/packages/46/91/3a6f3cdbc78c9d8f520c7deda7eb61001f2910167e454714c72b50594be3/model_bakery-1.7.0.tar.gz", hash = "sha256:70bc7da3864c28bacfbaaa3f3b0b52020dedc8fec5229a195fc39a4dfa5ec20d"},
 ]
 "packaging 21.3" = [
     {url = "https://files.pythonhosted.org/packages/05/8e/8de486cbd03baba4deef4142bd643a3e7bbe954a784dc1bb17142572d127/packaging-21.3-py3-none-any.whl", hash = "sha256:ef103e05f519cdc783ae24ea4e2e0f508a9c99b2d4969652eed6a2e1ea5bd522"},
