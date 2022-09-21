@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+
 from typing import Optional
 import unittest
 from unittest.mock import patch
@@ -205,8 +205,7 @@ class TestListCategoriesUseCase(unittest.TestCase):
     def test_execute_using_empty_search_params(self):
         self.category_repo.items = [
             Category(name='test 1'),
-            Category(name='test 2', created_at=datetime.now() +
-                     timedelta(seconds=200)),
+            Category(name='test 2'),
         ]
         with patch.object(
             self.category_repo,
