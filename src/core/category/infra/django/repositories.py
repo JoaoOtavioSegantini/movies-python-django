@@ -1,42 +1,37 @@
 from typing import List
 from django.core import exceptions as django_exceptions
+from django.core.paginator import Paginator
 from core.category.domain.repositories import CategoryRepository
 from core.category.domain.entities import Category
 from core._seedworker.domain.entities import UniqueEntityId
 from core.category.infra.django.models import CategoryModel
 from core._seedworker.domain.exceptions import NotFoundException
+from core.category.infra.django.mappers import CategoryModelMapper
 
 
 class CategoryDjangoRepository(CategoryRepository):
+    sortable_fields: List[str] = ["name", "created_at"]
 
     def insert(self, entity: Category) -> None:
-        CategoryModel.objects.create(  # pylint: disable=no-member
-            **entity.to_dict())
+        model = CategoryModelMapper.to_model(entity)
+        model.save()
 
     def find_all(self) -> List[Category]:
-        return [Category(
-            unique_entity_id=UniqueEntityId(str(model.id)),
-            name=model.name,
-            description=model.description,
-            is_active=model.is_active,
-            created_at=model.created_at) for model in CategoryModel.objects.all()]  # pylint: disable=no-member
+        return [CategoryModelMapper.to_entity(model) for model in CategoryModel.objects.all()]  # pylint: disable=no-member
 
     def find_by_id(self, entity_id: str | UniqueEntityId) -> Category:
         id_str = str(entity_id)
         model = self._get(id_str)
-        return Category(
-            unique_entity_id=UniqueEntityId(id_str),
-            name=model.name,
-            description=model.description,
-            is_active=model.is_active,
-            created_at=model.created_at
-        )
+        return CategoryModelMapper.to_entity(model)
 
     def update(self, entity: Category) -> None:
-        return super().update(entity)
+        self._get(entity.id)
+        model = CategoryModelMapper.to_model(entity)
+        model.save()
 
     def delete(self, entity_id: str | UniqueEntityId) -> None:
-        return super().delete(entity_id)
+        model = self._get(str(entity_id))
+        model.delete()
 
     def _get(self, entity_id: str) -> CategoryModel:
         try:
@@ -48,4 +43,28 @@ class CategoryDjangoRepository(CategoryRepository):
     def search(
         self, input_params: CategoryRepository.SearchParams
     ) -> CategoryRepository.SearchResult:
-        return super().search(input_params)
+        query = CategoryModel.objects.all()  # pylint: disable=no-member
+
+        if input_params.filter:
+            query = query.filter(name__icontains=input_params.filter)
+
+        if input_params.sort and input_params.sort in self.sortable_fields:
+            query = query.order_by(
+                input_params.sort if input_params.sort_dir == "asc" else f'-{input_params.sort}'
+            )
+        else:
+            query = query.order_by('-created_at')
+
+        paginator = Paginator(query, input_params.per_page)
+        page_obj = paginator.page(input_params.page)
+
+        return CategoryRepository.SearchResult(
+            items=[CategoryModelMapper.to_entity(
+                model) for model in page_obj.object_list],
+            total=paginator.count,
+            current_page=input_params.page,
+            per_page=input_params.per_page,
+            sort=input_params.sort,
+            sort_dir=input_params.sort_dir,
+            filter=input_params.filter
+        )
