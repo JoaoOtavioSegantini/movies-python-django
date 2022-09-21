@@ -30,7 +30,8 @@
 	"extensions": [
 		"ms-python.python",
 		"sourcery.sourcery",
-		"bungcip.better-toml"
+		"bungcip.better-toml",
+		"humao.rest-client"
 	],
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
